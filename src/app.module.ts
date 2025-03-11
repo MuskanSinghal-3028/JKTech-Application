@@ -25,7 +25,7 @@ import { GoogleAuthMiddleware } from './middleware/auth.middleware';
   PassportModule.register({ defaultStrategy: 'google' }), 
   JwtModule.register({
     secret: 'myKey', 
-    // signOptions: { expiresIn: '1h' }, 
+    signOptions: { expiresIn: '1h' }, 
   }),
   TypeOrmModule.forRootAsync({
     useFactory: (config: ConfigService) => ({
@@ -59,8 +59,10 @@ export class AppModule {
       .exclude(
         { path: 'auth/google', method: RequestMethod.ALL },
         { path: 'auth/google/callback', method: RequestMethod.ALL },
+        { path: 'posts/generate-test-data', method: RequestMethod.ALL },
+
       )
       .forRoutes({ path: '*', method: RequestMethod.ALL });
-    
+      
   }
 }

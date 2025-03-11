@@ -19,7 +19,8 @@ describe('PostsController', () => {
             getAllPostsByUser: jest.fn(),
             deletePostById: jest.fn(),
             getPostById: jest.fn(),
-            updatePost: jest.fn()
+            updatePost: jest.fn(),
+            generateTestPosts: jest.fn(),
           },
         },
       ],
@@ -29,7 +30,7 @@ describe('PostsController', () => {
     postsService = module.get<PostsService>(PostsService);
   });
 
-  describe('createFilter', () => {
+  describe('createPost', () => {
     it('should create a post and return success response', async () => {
       const createPostDto: CreatePostDto = {
         title: 'POst6',
@@ -53,7 +54,7 @@ describe('PostsController', () => {
       };
       jest.spyOn(postsService, 'createPost').mockResolvedValue(result);
 
-      await postsController.createFilter(createPostDto, mockResponse);
+      await postsController.createPost(createPostDto, mockResponse);
 
       expect(postsService.createPost).toHaveBeenCalledWith(createPostDto);
       expect(mockResponse.status).toHaveBeenCalledWith(200);
@@ -78,7 +79,7 @@ describe('PostsController', () => {
       const error = new Error('Internal server error');
       jest.spyOn(postsService, 'createPost').mockRejectedValue(error);
 
-      await postsController.createFilter(createPostDto, mockResponse);
+      await postsController.createPost(createPostDto, mockResponse);
 
       expect(postsService.createPost).toHaveBeenCalledWith(createPostDto);
       expect(mockResponse.status).toHaveBeenCalledWith(500);
@@ -375,6 +376,49 @@ describe('PostsController', () => {
       await postsController.updatePost(updatePostDto, mockResponse);
 
       expect(postsService.updatePost).toHaveBeenCalledWith(updatePostDto);
+      expect(mockResponse.status).toHaveBeenCalledWith(500);
+      expect(mockResponse.send).toHaveBeenCalledWith({
+        status: 500,
+        message: error.message,
+      });
+    });
+  });
+
+  describe('generateTestPosts', () => {
+    it('should generate test posts and return the total number of inserted posts', async () => {
+      const userEmail = 'testuser@example.com';
+      const mockResponse = {
+        status: jest.fn().mockReturnThis(),
+        send: jest.fn(),
+      } as unknown as Response;
+
+      const totalInserted = 1000;
+      jest.spyOn(postsService, 'generateTestPosts').mockResolvedValue(totalInserted);
+
+      await postsController.generateTestPosts(userEmail, mockResponse);
+
+      expect(postsService.generateTestPosts).toHaveBeenCalledWith(userEmail);
+      expect(mockResponse.status).toHaveBeenCalledWith(200);
+      expect(mockResponse.send).toHaveBeenCalledWith({
+        status: 200,
+        message: "Test posts created successfully", // Updated message
+        totalInserted,
+      });
+    });
+
+    it('should return 500 if an error occurs', async () => {
+      const userEmail = 'testuser@example.com';
+      const mockResponse = {
+        status: jest.fn().mockReturnThis(),
+        send: jest.fn(),
+      } as unknown as Response;
+
+      const error = new Error('Internal server error');
+      jest.spyOn(postsService, 'generateTestPosts').mockRejectedValue(error);
+
+      await postsController.generateTestPosts(userEmail, mockResponse);
+
+      expect(postsService.generateTestPosts).toHaveBeenCalledWith(userEmail);
       expect(mockResponse.status).toHaveBeenCalledWith(500);
       expect(mockResponse.send).toHaveBeenCalledWith({
         status: 500,

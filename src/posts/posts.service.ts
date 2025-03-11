@@ -80,4 +80,25 @@ export class PostsService {
       throw e;
     }
   }
+  async generateTestPosts(userEmail: string){
+    const batchSize = 100;
+    const totalPosts = 1000;
+    const batchPromises: Promise<any>[] = [];
+
+    for (let i = 0; i < totalPosts / batchSize; i++) {
+      const testPosts = Array.from({ length: batchSize }, (_, index) => ({
+        title: `Test Post ${i * batchSize + index + 1}`,
+        description: `This is a test description for post ${i * batchSize + index + 1}`,
+        user: userEmail,
+      }));
+
+      batchPromises.push(this.postsRepository.insert(testPosts));
+    }
+
+    const results = await Promise.all(batchPromises);
+
+    const totalInserted = results.reduce((acc, res) => acc + res.identifiers.length, 0);
+    
+    return totalInserted;
+  }
 }

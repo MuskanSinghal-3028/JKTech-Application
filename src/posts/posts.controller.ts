@@ -14,7 +14,7 @@ export class PostsController {
   @ApiResponse({ status: 200, description: "successful" })
   @ApiResponse({ status: 500, description: "internal server error" })
   @ApiResponse({ status: 404, description: "not found" })
-  async createFilter(
+  async createPost(
     @Body() CreatePostDto: CreatePostDto,
     @Res() resp: Response
   ) {
@@ -149,6 +149,34 @@ export class PostsController {
       return resp.status(500).send({
         status: 500,
         message: e.message.toString(),
+      });
+    }
+  }
+  @Get('generate-test-data')
+  @ApiOperation({ description: 'Generate 500 test posts in batches of 100' })
+  @ApiResponse({ status: 200, description: 'Test data created successfully' })
+  @ApiResponse({ status: 400, description: 'Bad request' })
+  @ApiResponse({ status: 500, description: 'Internal server error' })
+  async generateTestPosts(@Query('user') userEmail: string, @Res() resp: Response) {
+    try {
+      if (!userEmail) {
+        return resp.status(400).send({
+          status: 400,
+          message: 'User email is required',
+        });
+      }
+
+      const totalInserted = await this.postsService.generateTestPosts(userEmail);
+
+      return resp.status(200).send({
+        status: 200,
+        message: 'Test posts created successfully',
+        totalInserted,
+      });
+    } catch (error) {
+      return resp.status(500).send({
+        status: 500,
+        message: error.message.toString(),
       });
     }
   }

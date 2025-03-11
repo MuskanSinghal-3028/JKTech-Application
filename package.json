@@ -12,6 +12,7 @@
     "typeorm": "typeorm-ts-node-commonjs",
     "start:dev": "set NODE_DEVELOPMENT=dev & nest start --watch",
     "start:debug": "nest start --debug --watch",
+    "test:posts": "jest src/posts/posts.service.spec.ts src/posts/posts.controller.spec.ts",
     "start:prod": "npm run build && node src/pg.js && npm run backend:migrate:dev && node dist/main",
     "backend:generate:dev": "set NODE_DEVELOPMENT=dev & npm run typeorm migration:generate src/migrations/$npm_config_name -- -d src/config/typeorm.config.ts",
     "backend:migrate:dev": "set NODE_DEVELOPMENT=dev & npm run typeorm migration:run -- -d src/config/typeorm.config.ts",

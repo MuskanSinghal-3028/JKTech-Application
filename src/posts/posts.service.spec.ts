@@ -124,4 +124,29 @@ describe('PostsService', () => {
       await expect(service.createPost(payload)).rejects.toThrow('Post with the same title already exists for this user.');
     });
   });
+
+  describe('generateTestPosts', () => {
+    it('should generate test posts successfully', async () => {
+      const userEmail = 'test@example.com';
+      const totalInserted = 1000;
+      jest.spyOn(service, 'generateTestPosts').mockResolvedValue(totalInserted);
+
+      expect(await service.generateTestPosts(userEmail)).toEqual(totalInserted);
+    });
+
+    it('should throw an error if user email is not provided', async () => {
+      jest.spyOn(repository, 'insert').mockImplementation(() => {
+        throw new Error('User email is required');
+      });
+
+      await expect(service.generateTestPosts('')).rejects.toThrow('User email is required');
+    });
+
+    it('should throw an error if something goes wrong', async () => {
+      const userEmail = 'test@example.com';
+      jest.spyOn(service, 'generateTestPosts').mockRejectedValue(new Error('Error'));
+
+      await expect(service.generateTestPosts(userEmail)).rejects.toThrow('Error');
+    });
+  });
 });
