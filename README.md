@@ -33,13 +33,7 @@ Ensure you have the following installed before proceeding:
    ```
 
 5. **Configure environment variables**  
-   - Create a `.env.dev` file in the root directory.
-   - Add the following environment variables:
-     ```env
-     GOOGLE_CLIENT_ID=907182114586-50hm44obj3s80iu1cnqokejovcu3bc4d.apps.googleusercontent.com
-     GOOGLE_CLIENT_SECRET=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
-     GOOGLE_CALLBACK_URL=http://localhost:5600/auth/google/callback
-     ```
+   
    - Modify `.env.dev` to include database configuration.
 
 6. **Start the application in production mode**  
