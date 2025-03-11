@@ -15,67 +15,55 @@ Ensure you have the following installed before proceeding:
 1. **Clone the repository**  
    ```sh
    git clone https://github.com/MuskanSinghal-3028/JKTech-Application.git
-Navigate to the project directory
+   ```
 
-sh
-Copy
-Edit
-cd JKTech-Application
-Checkout the develop branch
+2. **Navigate to the project directory**  
+   ```sh
+   cd JKTech-Application
+   ```
 
-sh
-Copy
-Edit
-git checkout develop
-Install dependencies
+3. **Checkout the develop branch**  
+   ```sh
+   git checkout develop
+   ```
 
-sh
-Copy
-Edit
-npm install
-Configure environment variables
+4. **Install dependencies**  
+   ```sh
+   npm install
+   ```
 
-Create a .env.dev file in the root directory.
-Add the following environment variables:
-env
-Copy
-Edit
-GOOGLE_CLIENT_ID=907182114586-50hm44obj3s80iu1cnqokejovcu3bc4d.apps.googleusercontent.com
-GOOGLE_CLIENT_SECRET=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
-GOOGLE_CALLBACK_URL=http://localhost:5600/auth/google/callback
-Modify .env.dev to include database configuration.
-Start the application in production mode
+5. **Configure environment variables**  
+   - Create a `.env.dev` file in the root directory.
+   - Add the following environment variables:
+     ```env
+     GOOGLE_CLIENT_ID=907182114586-50hm44obj3s80iu1cnqokejovcu3bc4d.apps.googleusercontent.com
+     GOOGLE_CLIENT_SECRET=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
+     GOOGLE_CALLBACK_URL=http://localhost:5600/auth/google/callback
+     ```
+   - Modify `.env.dev` to include database configuration.
 
-sh
-Copy
-Edit
-npm run start:prod
-Access API documentation via Swagger
-Open in your browser:
+6. **Start the application in production mode**  
+   ```sh
+   npm run start:prod
+   ```
 
-bash
-Copy
-Edit
-<backend-url>/api
-(Replace <backend-url> with the actual backend URL.)
+7. **Access API documentation via Swagger**  
+   Open in your browser:
+   ```bash
+   <backend-url>/api
+   ```
+   (Replace `<backend-url>` with the actual backend URL.)
 
-Generate test data
+8. **Generate test data**  
+   - Use the `/posts/generate-test-data` endpoint via Swagger.
+   - Add your email (e.g., test@gmail.com) as a query parameter.
+   - This will populate test data in your database.
 
-Use the /posts/generate-test-data endpoint via Swagger.
-Add your email (e.g., test@gmail.com) as a query parameter.
-This will populate test data in your database.
-Notes
+### Notes
 Ensure your database is properly configured before running the application.
 
-
-Contact
+### Contact
 For any queries or support, reach out to Muskan Singhal.
-
-sql
-Copy
-Edit
-
-Copy and paste this into your `README.md` file in your repository. Let me know if you need any changes! 🚀
 
 
 
