@@ -1,7 +1,5 @@
 # JKTech-Application
 
-## Overview
-JKTech-Application is a backend application built with Node.js. It integrates Google OAuth authentication and provides API endpoints, including a test data generation feature.
 
 ## Installation and Setup
 
@@ -53,11 +51,14 @@ Ensure you have the following installed before proceeding:
    - Add your email (e.g., test@gmail.com) as a query parameter.
    - This will populate test data in your database.
 
-### Notes
-Ensure your database is properly configured before running the application.
+### Testing
 
-### Contact
-For any queries or support, reach out to Muskan Singhal.
+**Run unit tests for the backend service**  
+```sh
+npm run test:posts
+```
+
+
 
 
 
