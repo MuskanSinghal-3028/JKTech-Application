@@ -75,7 +75,7 @@ Ensure you have the following installed before proceeding:
       - Click **“+ Create Credentials”** → Select **OAuth Client ID.**
       - Choose **Web Application** and configure authorized redirect URIs:
         ```
-        http://localhost:3000/auth/google/callback
+        http://localhost:5600/auth/google/callback
         ```
       - Click **Create** and download the `client_secret.json` file.
 
@@ -86,7 +86,7 @@ Ensure you have the following installed before proceeding:
      ```
      GOOGLE_CLIENT_ID=<your-client-id>
      GOOGLE_CLIENT_SECRET=<your-client-secret>
-     GOOGLE_CALLBACK_URL=http://localhost:3000/auth/google/callback
+     GOOGLE_CALLBACK_URL=http://localhost:5600/auth/google/callback
      ```
 
 7. **Start the application in production mode**  
